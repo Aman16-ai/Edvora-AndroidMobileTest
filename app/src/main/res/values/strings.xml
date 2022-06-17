@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">mobileTest2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ride_tv_text">Ride Id : <font color="#FFFFFF">02</font></string>
+    <string name="origin_tv_text">Origin Station : <font color="#FFFFFF">20</font></string>
+    <string name="station_path_tv_text">Station path : <font color="#FFFFFF">[20,39,40,42,54,63,72,88,98]</font></string>
+    <string name="date">Date : <font color="#FFFFFF">15th Feb 2022 16:33</font></string>
+    <string name="distance">Distance : <font color="#FFFFFF">0</font></string>
+
+
+</resources>
