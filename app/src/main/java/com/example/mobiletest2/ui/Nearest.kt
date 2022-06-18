@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mobiletest2.R
+import com.example.mobiletest2.data.model.Ride
 import com.example.mobiletest2.data.repository.ApiResponse
 import com.example.mobiletest2.databinding.FragmentNeareastBinding
 import com.example.mobiletest2.ui.adapter.NearestRideAdapter
@@ -25,6 +26,9 @@ class Nearest : Fragment() {
 
     private val binding get() = _binding!!
     private lateinit var nearestRideAdapter: NearestRideAdapter
+
+    private  var rideList:List<Ride>?=null
+
     private val nearestRideViewModel : NearestRideViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +49,17 @@ class Nearest : Fragment() {
             adapter = nearestRideAdapter
         }
 
+        nearestRideViewModel.stateFliteredRides.observe(viewLifecycleOwner) {
+            it?.let {
+                nearestRideAdapter.updateRides(it)
+            }
+        }
         nearestRideViewModel.rides.observe(viewLifecycleOwner) { it ->
             it?.let { it ->
                 when(it) {
                         is ApiResponse.Success -> {
                             it.data?.let {
+                                rideList = it
                                 nearestRideAdapter.updateRides(it)
                             }
                         }
@@ -64,6 +74,37 @@ class Nearest : Fragment() {
     }
 
 
+    fun setDataFromActivity(state : String) {
+        rideList?.let {
+            nearestRideViewModel.filterByState(it,state)
+        }
+    }
+
+    fun setCityDataFromActivity(city : String) {
+        rideList?.let {
+            nearestRideViewModel.filterByCity(it,city)
+        }
+    }
+
+    fun getStateList() : List<String> {
+        val stateList = ArrayList<String>()
+        rideList?.let {
+            for(i in it) {
+                stateList.add(i.state)
+            }
+        }
+        return stateList
+    }
+
+    fun getCityList() : List<String> {
+        val cityList = ArrayList<String>()
+        rideList?.let {
+            for(i in it) {
+                cityList.add(i.city)
+            }
+        }
+        return cityList
+    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

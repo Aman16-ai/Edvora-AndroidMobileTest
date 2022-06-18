@@ -19,13 +19,20 @@ class NearestRideViewModel(application: Application) : AndroidViewModel(applicat
     private val rideRepository = RideRepository()
 
     val rides = rideRepository.rides
+    val stateFliteredRides = rideRepository.stateFilteredRide
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             rideRepository.fetchNearestRides()
         }
     }
 
+    fun filterByState(rides:List<Ride>,state:String)  {
+         rideRepository.filterRidesByState(rides,state)
+    }
 
- 
+    fun filterByCity(rides: List<Ride>, city:String) {
+        rideRepository.filterRidesByCity(rides,city)
+    }
 
 }

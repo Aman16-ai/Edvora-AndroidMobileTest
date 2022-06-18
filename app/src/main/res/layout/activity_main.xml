@@ -63,6 +63,7 @@
                />
 
           <androidx.constraintlayout.widget.ConstraintLayout
+              android:id="@+id/tabConstraint"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginTop="12dp"
@@ -136,7 +137,89 @@
 
 
    </androidx.appcompat.widget.Toolbar>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/filter_card"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="#000000"
+        android:layout_marginRight="20dp"
+        app:cardCornerRadius="10dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/filter_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filters"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:textSize="20sp"
+                android:layout_marginLeft="42dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#A5A5A5"
+                />
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/exposedlayout_state"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/filter_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginLeft="6dp"
+                android:background="#232323"
+                android:layout_marginTop="15dp"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/statetxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="State"
+                    android:inputType="none"
+                    android:textColor="@color/white"
+                    android:background="#232323"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/exposedlayout_city"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="168dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/exposedlayout_state"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="23dp"
+                android:layout_marginLeft="6dp"
+                android:background="#232323"
+                android:layout_marginTop="8dp"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/citytxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="City"
+                    android:inputType="none"
+                    android:textColor="@color/white"
+                    android:background="#232323"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpage"
         android:layout_width="match_parent"
@@ -145,5 +228,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

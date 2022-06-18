@@ -17,6 +17,7 @@ class RideRepository {
     private val _ridesLiveData = MutableLiveData<ApiResponse<List<Ride>>>()
     private val _upComingRidesLiveData = MutableLiveData<ApiResponse<List<Ride>>>()
     private val _pastRidesLiveDate = MutableLiveData<ApiResponse<List<Ride>>>()
+    private val _stateFilteredRide = MutableLiveData<List<Ride>>()
 
     val rides:LiveData<ApiResponse<List<Ride>>>
     get()= _ridesLiveData
@@ -26,6 +27,9 @@ class RideRepository {
 
     val pastRides : LiveData<ApiResponse<List<Ride>>>
     get()= _pastRidesLiveDate
+
+    val stateFilteredRide : LiveData<List<Ride>>
+    get() = _stateFilteredRide
 
     private fun closestStationDistance(stations:List<Int>, target:Int):Int {
         var max: Int = abs(stations[0] - target)
@@ -122,4 +126,13 @@ class RideRepository {
         }
     }
 
+    fun filterRidesByState(rides : List<Ride>,state:String) {
+        if(state == "state") _stateFilteredRide.value = rides
+        else _stateFilteredRide.value = rides.filter { it -> it.state == state }
+    }
+
+    fun filterRidesByCity(rides : List<Ride>,city:String) {
+        if(city == "city") _stateFilteredRide.value = rides
+        else _stateFilteredRide.value = rides.filter { it -> it.city == city }
+    }
 }

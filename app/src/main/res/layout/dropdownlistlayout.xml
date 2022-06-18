@@ -1,0 +1,13 @@
+
+<TextView
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Delhi"
+    android:background="#232323"
+    android:textColor="@color/white"
+    android:textSize="15dp"
+    android:padding="20px"
+    android:layout_margin="20px"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    />
