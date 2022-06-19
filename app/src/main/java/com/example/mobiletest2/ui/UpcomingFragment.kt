@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class Upcoming : Fragment() {
+class UpcomingFragment : Fragment() {
 
 
     private var _binding : FragmentUpcomingBinding? = null
@@ -93,7 +93,9 @@ class Upcoming : Fragment() {
         val stateList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                stateList.add(i.state)
+                if(i.state !in stateList) {
+                    stateList.add(i.state)
+                }
             }
         }
         return stateList
@@ -103,7 +105,9 @@ class Upcoming : Fragment() {
         val cityList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                cityList.add(i.city)
+                if(i.city !in cityList) {
+                    cityList.add(i.city)
+                }
             }
         }
         return cityList

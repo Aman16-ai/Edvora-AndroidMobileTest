@@ -18,10 +18,9 @@ import com.example.mobiletest2.ui.adapter.NearestRideAdapter
 import com.example.mobiletest2.ui.viewModel.NearestRideViewModel
 
 
-class Nearest : Fragment() {
+class NearestFragment : Fragment() {
 
 
-    private lateinit var recyclerView: RecyclerView
     private var _binding : FragmentNeareastBinding? = null
 
     private val binding get() = _binding!!
@@ -43,19 +42,25 @@ class Nearest : Fragment() {
         val view = binding.root
         nearestRideAdapter = NearestRideAdapter(requireContext())
 
+        //setting up recyclerview
         binding.nearestRideRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = nearestRideAdapter
         }
 
+        //observing the stateFilteredRides live data
         nearestRideViewModel.stateFliteredRides.observe(viewLifecycleOwner) {
             it?.let {
                 nearestRideAdapter.updateRides(it)
             }
         }
+
+        //observing the nearest ride live data
         nearestRideViewModel.rides.observe(viewLifecycleOwner) { it ->
             it?.let { it ->
+
+                //checking the ApiResponse type and taking action according to it
                 when(it) {
                         is ApiResponse.Success -> {
                             it.data?.let {
@@ -74,33 +79,41 @@ class Nearest : Fragment() {
     }
 
 
+    //method taking the state string from activity to filter the list of rides by selected states
     fun setDataFromActivity(state : String) {
         rideList?.let {
             nearestRideViewModel.filterByState(it,state)
         }
     }
 
+    //method taking the city string from activity to filter the list of rides by selected city
     fun setCityDataFromActivity(city : String) {
         rideList?.let {
             nearestRideViewModel.filterByCity(it,city)
         }
     }
 
+    //passing the list of state of rides to activity
     fun getStateList() : List<String> {
         val stateList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                stateList.add(i.state)
+                if(i.state !in stateList) {
+                    stateList.add(i.state)
+                }
             }
         }
         return stateList
     }
 
+    //passing the list of city of rides to activity
     fun getCityList() : List<String> {
         val cityList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                cityList.add(i.city)
+               if(i.city !in cityList) {
+                   cityList.add(i.city)
+               }
             }
         }
         return cityList

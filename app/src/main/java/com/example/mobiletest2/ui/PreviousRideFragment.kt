@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class PreviousRide : Fragment() {
+class PreviousRideFragment : Fragment() {
 
     private  var rideList:List<Ride>?=null
     private var _binding : FragmentPreviousRideBinding? = null
@@ -94,7 +94,9 @@ class PreviousRide : Fragment() {
         val stateList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                stateList.add(i.state)
+                if(i.state !in stateList) {
+                    stateList.add(i.state)
+                }
             }
         }
         return stateList
@@ -104,7 +106,9 @@ class PreviousRide : Fragment() {
         val cityList = ArrayList<String>()
         rideList?.let {
             for(i in it) {
-                cityList.add(i.city)
+                if(i.city !in cityList) {
+                    cityList.add(i.city)
+                }
             }
         }
         return cityList

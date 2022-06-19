@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.Upcoming"
+    tools:context=".ui.UpcomingFragment"
     android:background="#292929"
     android:padding="15dp"
     >
@@ -18,5 +18,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="?attr/actionBarSize"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

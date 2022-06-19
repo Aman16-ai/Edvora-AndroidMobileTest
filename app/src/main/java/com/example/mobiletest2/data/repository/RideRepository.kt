@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.mobiletest2.data.model.Ride
 import com.example.mobiletest2.data.model.User
 import com.example.mobiletest2.data.service.RideApiService
+import com.example.mobiletest2.utils.checkPastDate
+import com.example.mobiletest2.utils.checkUpcomingDate
 import java.lang.Math.abs
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,22 +68,6 @@ class RideRepository {
             }
     }
 
-    private fun convertStringToDate(dateStr: String): Date? {
-        val dateFormatter = SimpleDateFormat("MM/dd/yy HH:mm aa")
-        return dateFormatter.parse(dateStr)
-    }
-    private fun checkUpcomingDate(rideDate: String): Boolean? {
-        val currentDate = Date()
-        val formattedRideDate = convertStringToDate(rideDate)
-        Log.d("date", "fetchUpcomingRides: ${currentDate} ${formattedRideDate} ${formattedRideDate?.after(currentDate)}")
-        return formattedRideDate?.after(currentDate)
-    }
-
-    private fun checkPastDate(rideDate: String):Boolean? {
-        val currentDate = Date()
-        val formattedRideDate = convertStringToDate(rideDate)
-        return formattedRideDate?.before(currentDate)
-    }
     suspend fun fetchUpcomingRides() {
         try {
             val rides:List<Ride>? = RideApiService.rideInstance.getAllRides().body()
@@ -97,7 +83,7 @@ class RideRepository {
                     upComingRideList.add(ride)
                 }
             }
-
+            upComingRideList.sortBy { it.distance }
             _upComingRidesLiveData.postValue(ApiResponse.Success(upComingRideList))
         }
         catch(err:Error) {
@@ -118,7 +104,7 @@ class RideRepository {
                     pastRideList.add(ride)
                 }
             }
-            pastRideList.sortBy { it.date }
+            pastRideList.sortBy { it.distance }
             _pastRidesLiveDate.postValue(ApiResponse.Success(pastRideList))
         }
         catch (err : Error) {
