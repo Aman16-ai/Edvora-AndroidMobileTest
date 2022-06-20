@@ -14,7 +14,7 @@ class PastRideViewModel(application: Application) : AndroidViewModel(application
 
     val pastRide = rideRepository.pastRides
 
-    val stateFliteredRides = rideRepository.stateFilteredRide
+    val fliteredRides = rideRepository.filteredRide
     init {
         viewModelScope.launch(Dispatchers.IO) {
             rideRepository.fetchPastRides()

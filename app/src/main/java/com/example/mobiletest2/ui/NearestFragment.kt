@@ -50,7 +50,7 @@ class NearestFragment : Fragment() {
         }
 
         //observing the stateFilteredRides live data
-        nearestRideViewModel.stateFliteredRides.observe(viewLifecycleOwner) {
+        nearestRideViewModel.fliteredRides.observe(viewLifecycleOwner) {
             it?.let {
                 nearestRideAdapter.updateRides(it)
             }

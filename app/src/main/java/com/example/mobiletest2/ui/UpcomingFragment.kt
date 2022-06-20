@@ -52,7 +52,7 @@ class UpcomingFragment : Fragment() {
             adapter = upComingRideAdapter
         }
 
-        upcomingRideViewModel.stateFliteredRides.observe(viewLifecycleOwner) {
+        upcomingRideViewModel.fliteredRides.observe(viewLifecycleOwner) {
             it?.let {
                 upComingRideAdapter.updateRides(it)
             }

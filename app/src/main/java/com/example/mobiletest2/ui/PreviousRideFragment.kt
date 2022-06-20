@@ -53,7 +53,7 @@ class PreviousRideFragment : Fragment() {
             adapter = pastRideAdapter
         }
 
-        pastRideViewModel.stateFliteredRides.observe(viewLifecycleOwner) {
+        pastRideViewModel.fliteredRides.observe(viewLifecycleOwner) {
             it?.let {
                 pastRideAdapter.updateRides(it)
             }

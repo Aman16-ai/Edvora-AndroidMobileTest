@@ -13,7 +13,7 @@ class UpcomingRideViewModel(application: Application):AndroidViewModel(applicati
     private val rideRepository = RideRepository()
 
     val upComingRides = rideRepository.upComingRides
-    val stateFliteredRides = rideRepository.stateFilteredRide
+    val fliteredRides = rideRepository.filteredRide
     init {
         viewModelScope.launch {
             rideRepository.fetchUpcomingRides()

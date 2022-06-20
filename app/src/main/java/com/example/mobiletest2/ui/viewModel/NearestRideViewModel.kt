@@ -19,7 +19,7 @@ class NearestRideViewModel(application: Application) : AndroidViewModel(applicat
     private val rideRepository = RideRepository()
 
     val rides = rideRepository.rides
-    val stateFliteredRides = rideRepository.stateFilteredRide
+    val fliteredRides = rideRepository.filteredRide
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
